@@ -41,7 +41,7 @@ export class NightGame {
     listen(window,'keydown',((e:KeyboardEvent)=>{
       if(e.metaKey||e.ctrlKey||e.altKey)return;
       const k=(e.code?.startsWith('Key')?e.code.slice(3):e.key).toLowerCase();
-      if(this.mode==='playing'&&'wasdqerfzxc'.includes(k)&&k.length===1)e.preventDefault();
+      if(this.mode==='playing'&&'qerfzxc'.includes(k)&&k.length===1)e.preventDefault();
       if([' ','arrowup','arrowdown','arrowleft','arrowright'].includes(k))e.preventDefault();
       if((k==='f'||k==='enter')&&['menu','dead','won'].includes(this.mode)){e.preventDefault();if(this.mode==='dead')this.retry();else this.start();return;}
       if(this.mode==='upgrade'&&['z','x','c'].includes(k)){e.preventDefault();const id=this.choices[['z','x','c'].indexOf(k)];if(id!==undefined)this.chooseUpgrade(id);return;}
@@ -73,7 +73,7 @@ export class NightGame {
   }
   start(){
     this.mode='playing';this.player={x:pathX(3930),y:3930,hp:100,energy:3,a:-Math.PI/2,inv:1.5,atk:0,combo:0,comboTimer:0,dodge:0,q:0,e:0,boost:0,moving:false};
-    this.enemies=[];this.shots=[];this.fx=[];this.slashes=[];this.hazards=[];this.events.clear();this.used.clear();this.powers.clear();this.kills=0;this.time=0;this.nextId=1;this.bossDefeated=false;this.clearInput();this.cam={x:800,y:3890};this.mouse={x:640,y:200};this.save=null;this.storeSave();this.unlockAudio();this.message('雾林驿道\n循着灯火，向北前进',4);this.canvas.focus();this.emit();
+    this.enemies=[];this.shots=[];this.fx=[];this.slashes=[];this.hazards=[];this.events.clear();this.used.clear();this.powers.clear();this.kills=0;this.time=0;this.nextId=1;this.bossDefeated=false;this.clearInput();this.cam={x:800,y:3890};this.mouse={x:640,y:200};this.save=null;this.storeSave();this.unlockAudio();this.message('雾林驿道\n方向键移动 · Z 连斩 · X 剑气 · C 闪避',4);this.canvas.focus();this.emit();
   }
   storeSave(){this.save={x:this.player.x,y:this.player.y,kills:this.kills,events:[...this.events],upgrades:[...this.powers],used:[...this.used]};}
   retry(){
@@ -101,7 +101,7 @@ export class NightGame {
       this.sound(p.combo===2?150:240,.12,'triangle');
     }
     if(action==='ranged'&&p.energy>0&&p.atk<=0){p.energy--;p.atk=.38;this.shoot(p.x,p.y,p.a,30,false,this.powers.has(0));this.sound(630,.17,'sine');}
-    if(action==='dodge'&&p.dodge<=0){let dx=Number(this.keys.has('d')||this.keys.has('arrowright'))-Number(this.keys.has('a')||this.keys.has('arrowleft')),dy=Number(this.keys.has('s')||this.keys.has('arrowdown'))-Number(this.keys.has('w')||this.keys.has('arrowup'));const a=dx||dy?Math.atan2(dy,dx):p.a;this.movePlayer(Math.cos(a)*126,Math.sin(a)*126,true);p.inv=.28;p.dodge=this.powers.has(2)?.85:1.2;p.atk=0;if(this.powers.has(2))p.boost=2;this.sound(180,.1,'triangle');}
+    if(action==='dodge'&&p.dodge<=0){let dx=Number(this.keys.has('arrowright'))-Number(this.keys.has('arrowleft')),dy=Number(this.keys.has('arrowdown'))-Number(this.keys.has('arrowup'));const a=dx||dy?Math.atan2(dy,dx):p.a;this.movePlayer(Math.cos(a)*126,Math.sin(a)*126,true);p.inv=.28;p.dodge=this.powers.has(2)?.85:1.2;p.atk=0;if(this.powers.has(2))p.boost=2;this.sound(180,.1,'triangle');}
     if(action==='dash'&&p.q<=0){
       const ox=p.x,oy=p.y;p.q=5;p.inv=.3;p.atk=.12;this.movePlayer(Math.cos(p.a)*205,Math.sin(p.a)*205,true);
       for(const e of this.enemies){const dx=p.x-ox,dy=p.y-oy,t=clamp(((e.x-ox)*dx+(e.y-oy)*dy)/(dx*dx+dy*dy||1),0,1);if(!e.dead&&Math.hypot(e.x-ox-dx*t,e.y-oy-dy*t)<e.r+42)this.hit(e,this.powers.has(5)?80:40,false,true);}
@@ -146,7 +146,7 @@ export class NightGame {
     const p=this.player;this.time+=dt;this.shake=Math.max(0,this.shake-dt*18);
     for(const key of ['inv','atk','comboTimer','dodge','q','e','boost'] as const)p[key]=Math.max(0,p[key]-dt);
     if(this.toastTimer>0){this.toastTimer-=dt;if(this.toastTimer<=0)this.toast='';}
-    const mx=Number(this.keys.has('d')||this.keys.has('arrowright'))-Number(this.keys.has('a')||this.keys.has('arrowleft')),my=Number(this.keys.has('s')||this.keys.has('arrowdown'))-Number(this.keys.has('w')||this.keys.has('arrowup'));
+    const mx=Number(this.keys.has('arrowright'))-Number(this.keys.has('arrowleft')),my=Number(this.keys.has('arrowdown'))-Number(this.keys.has('arrowup'));
     p.moving=!!(mx||my);if(p.moving){const n=Math.hypot(mx,my),speed=p.atk>.15?166:225;this.movePlayer(mx/n*speed*dt,my/n*speed*dt);}
     this.updateAim(mx,my);
     if((this.held.has(0)||this.keys.has('z'))&&p.atk<=0)this.action('attack');if((this.held.has(2)||this.keys.has('x'))&&p.atk<=0&&p.energy>0)this.action('ranged');this.updateEvents();
