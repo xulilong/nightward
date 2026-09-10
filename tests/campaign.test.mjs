@@ -139,7 +139,7 @@ test('holding an attack key cannot auto-select an upgrade, and holding F cannot 
 });
 
 test('chapter skill unlocks and future chapter guard work for keyboard and direct entry',()=>{
- const g=setup();g.start();g.action('ranged');g.action('spin');g.action('dash');assert.equal(g.shots.length,0);assert.equal(g.player.e,0);assert.equal(g.player.q,0);g.action('guard');assert.ok(g.guard>0);
+ const g=setup();g.start();g.action('ranged');g.action('spin');g.action('dash');assert.equal(g.shots.length,1);assert.equal(g.player.energy,2);assert.equal(g.player.e,0);assert.equal(g.player.q,0);g.action('guard');assert.ok(g.guard>0);
  g.startSelectedChapter(1);g.action('dash');assert.ok(g.player.q>0);g.startSelectedChapter(2);assert.equal(g.stage,1);g.startSelectedChapter(7);assert.equal(g.stage,1);g.destroy();
 });
 test('village buildings block walking and fast projectiles while the former river is traversable',()=>{
@@ -157,7 +157,7 @@ test('village art rebuild keeps all objectives reachable and restores old saves 
 
 test('chapter guidance follows health and story progress without unlocking later skills',()=>{
  const g=setup();g.start();assert.match(g.contextGuidance(),/移动/);g.player.hp=20;assert.match(g.contextGuidance(),/药剂/);g.player.hp=100;g.player.y=1880;assert.match(g.currentObjective(),/军令/);g.used.add(1);assert.match(g.currentObjective(),/补给/);g.used.add(2);assert.match(g.currentObjective(),/加雷斯/);
- g.startSelectedChapter(1);assert.match(g.contextGuidance(),/Q/);g.used.add(0);g.used.add(1);assert.match(g.currentObjective(),/最后一处/);g.used.add(2);assert.match(g.currentObjective(),/三处/);assert.equal(g.skillUnlocked('ranged'),false);g.destroy();
+ g.startSelectedChapter(1);assert.match(g.contextGuidance(),/Q/);g.used.add(0);g.used.add(1);assert.match(g.currentObjective(),/最后一处/);g.used.add(2);assert.match(g.currentObjective(),/三处/);assert.equal(g.skillUnlocked('ranged'),true);g.destroy();
 });
 
 test('missed forest clue points back south and unlocks the boss when investigated',()=>{

@@ -234,7 +234,7 @@ export class NightGame {
     const p=this.player;if(p.hp<45&&this.potions>0)return 'W · 使用药剂恢复生命，补给点可补充药剂';
     const enemy=this.enemies.filter(e=>!e.dead&&Math.hypot(e.x-p.x,e.y-p.y)<300).sort((a,b)=>Math.hypot(a.x-p.x,a.y-p.y)-Math.hypot(b.x-p.x,b.y-p.y))[0];
     if(enemy?.wind&&enemy.wind>0)return 'D · 侧向闪避蓄力攻击，避开红色预警';
-    if(this.time<12)return this.stage===0?'↑ ↓ ← → 移动 · 按住 A 连斩，D 闪避':'Q · 突进斩已解锁，可快速接近弩手';
+    if(this.time<12)return this.stage===0?'↑ ↓ ← → 移动 · A 连斩 · X 剑气 · D 闪避':'Q · 突进斩已解锁，可快速接近弩手';
     if(enemy?.kind==='shield')return '绕到盾兵侧后方攻击 · 或打出第三段重斩';
     if(this.time<45&&enemy)return 'A · 按住连续出剑，攻击间隙可移动调整位置';
     if(this.stage===0&&!this.used.has(1)&&p.y<2450)return '军令在哨桥与废弃哨所之间的左侧石碑下 · 调查后北端营地才会出现加雷斯';
@@ -243,7 +243,7 @@ export class NightGame {
   emit(){const p=this.player;const chapter=p.y>2850?0:p.y>1750?1:p.y>1000?2:3;const boss=this.enemies.find(e=>e.kind==='boss'&&!e.dead);this.onChange({guidance:this.contextGuidance(),completedSites:[...this.used],dialogue:this.dialogue,story:{...this.story},training:this.training,ritualTime:this.ritual?.remaining??null,ritualId:this.ritual?.id??null,stage:this.stage,difficulty:this.difficulty,potions:this.potions,damage:this.damageTaken,perfectDodges:this.perfectDodges,records:this.records,hasSave:!!this.savedCampaign,relays:this.used.size,playerX:p.x,playerY:p.y,mode:this.mode,hp:Math.max(0,p.hp),energy:p.energy,kills:this.kills,time:this.time,chapter,progress:clamp((3930-p.y)/3520*100,0,100),objective:this.currentObjective(),dodgeCD:p.dodge,qCD:p.q,eCD:p.e,bossHP:boss&&boss.active?Math.max(0,boss.hp/boss.max*100):null,toast:this.toast,interact:this.interact,choices:this.choices,upgradeCount:this.powers.size,aimMode:this.aimMode});}
   chooseUpgrade(id:number){if(this.mode!=='upgrade'||!this.choices.includes(id))return;this.powers.add(id);this.mode='playing';this.clearInput();this.message('已获得强化 · '+upgrades[id].name);this.sound(700,.4);this.storeSave();this.emit();this.canvas.focus();}
   offerUpgrade(){const available=upgrades.map((_,i)=>i).filter(i=>!this.powers.has(i)&&(this.training||[2,6,7,8,11,...(this.stage===1?[5,9]:[])].includes(i)));const shift=this.used.size%Math.max(1,available.length);this.choices=[...available.slice(shift),...available.slice(0,shift)].slice(0,3);if(!this.choices.length)return;this.mode='upgrade';this.clearInput();this.emit();}
-  skillUnlocked(action:string){return this.training||!['ranged','spin','dash'].includes(action)||action==='dash'&&this.stage===1;}
+  skillUnlocked(action:string){return this.training||!['spin','dash'].includes(action)||action==='dash'&&this.stage===1;}
   talk(speaker:string,text:string,choices:{label:string;action:()=>void}[]){
     this.dialogue={speaker,text,choices:choices.map(c=>c.label)};this.dialogueActions=choices.map(c=>c.action);this.mode='dialogue';this.clearInput();this.emit();
   }
@@ -325,7 +325,7 @@ export class NightGame {
   updateEvents(){const y=this.player.y;
     const trigger=(id:number,at:number,fn:()=>void)=>{if(y<at&&!this.events.has(id)){this.events.add(id);fn();}};
     if(this.stage===0){
-      trigger(0,3730,()=>{this.spawn('beast',760,3530);this.spawn('beast',925,3480);this.message('空鞍马停在血迹旁 · A 连斩，D 闪避，S 防御',4);});
+      trigger(0,3730,()=>{this.spawn('beast',760,3530);this.spawn('beast',925,3480);this.message('空鞍马停在血迹旁 · A 连斩，X 剑气，D 闪避',4);});
       trigger(1,3360,()=>{this.spawn('archer',850,3180);this.spawn('beast',1020,3140);this.message('前方传来呼救 · 猎人营地位于东侧');});
       trigger(2,3100,()=>{this.spawn('beast',940,2930);this.spawn('archer',1080,2790);});
       trigger(3,2680,()=>{this.spawn('shield',760,2450);this.spawn('archer',700,2130);this.message('溪流哨桥 · 三段重斩压制盾兵，绕过箭线');});
