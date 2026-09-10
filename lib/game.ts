@@ -78,7 +78,7 @@ export class NightGame {
     listen(window,'keydown',((e:KeyboardEvent)=>{
       if(e.metaKey||e.ctrlKey||e.altKey)return;
       const k=(e.code?.startsWith('Key')?e.code.slice(3):e.key).toLowerCase();
-      if(this.mode==='playing'&&'qerfzxc'.includes(k)&&k.length===1)e.preventDefault();
+      if(this.mode==='playing'&&'qwerfasdzxc'.includes(k)&&k.length===1)e.preventDefault();
       if([' ','arrowup','arrowdown','arrowleft','arrowright'].includes(k))e.preventDefault();
       if(this.mode==='dialogue'){if(!e.repeat){if((k==='f'||k==='enter')&&this.dialogueActions.length===1)this.chooseDialogue(0);else if(['z','x','c'].includes(k))this.chooseDialogue(['z','x','c'].indexOf(k));}e.preventDefault();return;}
       if(this.mode==='interlude'&&!e.repeat&&(k==='f'||k==='enter')){e.preventDefault();this.nextChapter();return;}
@@ -92,8 +92,8 @@ export class NightGame {
       if(k==='escape'||k==='r'){if(!e.repeat)this.togglePause();return;}
       if(this.mode!=='playing')return;
       this.keys.add(k);
-      if(k==='z'||k==='x'){this.aimMode='auto';this.updateAim();if(!e.repeat)this.action(k==='z'?'attack':'ranged');}
-      if(!e.repeat){if(k==='c'||k===' ')this.action('dodge');if(k==='q')this.action('dash');if(k==='e')this.action('spin');if(k==='f')this.action('interact');if(k==='a')this.action('heal');if(k==='s')this.action('guard');}
+      if(k==='a'||k==='x'){this.aimMode='auto';this.updateAim();if(!e.repeat)this.action(k==='a'?'attack':'ranged');}
+      if(!e.repeat){if(k==='d'||k===' ')this.action('dodge');if(k==='q')this.action('dash');if(k==='e')this.action('spin');if(k==='f')this.action('interact');if(k==='w')this.action('heal');if(k==='s')this.action('guard');}
     }) as EventListener);
     listen(window,'keyup',((e:KeyboardEvent)=>{this.keys.delete((e.code?.startsWith('Key')?e.code.slice(3):e.key).toLowerCase());}) as EventListener);
     listen(canvas,'pointermove',((e:PointerEvent)=>{const r=canvas.getBoundingClientRect();this.mouse={x:(e.clientX-r.left)/r.width*1280,y:(e.clientY-r.top)/r.height*720};}) as EventListener);
@@ -231,12 +231,12 @@ export class NightGame {
   }
   contextGuidance(){
     if(this.mode!=='playing')return '';
-    const p=this.player;if(p.hp<45&&this.potions>0)return 'A · 使用药剂恢复生命，补给点可补充药剂';
+    const p=this.player;if(p.hp<45&&this.potions>0)return 'W · 使用药剂恢复生命，补给点可补充药剂';
     const enemy=this.enemies.filter(e=>!e.dead&&Math.hypot(e.x-p.x,e.y-p.y)<300).sort((a,b)=>Math.hypot(a.x-p.x,a.y-p.y)-Math.hypot(b.x-p.x,b.y-p.y))[0];
-    if(enemy?.wind&&enemy.wind>0)return 'C · 侧向闪避蓄力攻击，避开红色预警';
-    if(this.time<12)return this.stage===0?'↑ ↓ ← → 移动 · 按住 Z 连斩，C 闪避':'Q · 突进斩已解锁，可快速接近弩手';
+    if(enemy?.wind&&enemy.wind>0)return 'D · 侧向闪避蓄力攻击，避开红色预警';
+    if(this.time<12)return this.stage===0?'↑ ↓ ← → 移动 · 按住 A 连斩，D 闪避':'Q · 突进斩已解锁，可快速接近弩手';
     if(enemy?.kind==='shield')return '绕到盾兵侧后方攻击 · 或打出第三段重斩';
-    if(this.time<45&&enemy)return 'Z · 按住连续出剑，攻击间隙可移动调整位置';
+    if(this.time<45&&enemy)return 'A · 按住连续出剑，攻击间隙可移动调整位置';
     if(this.stage===0&&!this.used.has(1)&&p.y<2450)return '军令在哨桥与废弃哨所之间的左侧石碑下 · 调查后北端营地才会出现加雷斯';
     return '';
   }
@@ -325,7 +325,7 @@ export class NightGame {
   updateEvents(){const y=this.player.y;
     const trigger=(id:number,at:number,fn:()=>void)=>{if(y<at&&!this.events.has(id)){this.events.add(id);fn();}};
     if(this.stage===0){
-      trigger(0,3730,()=>{this.spawn('beast',760,3530);this.spawn('beast',925,3480);this.message('空鞍马停在血迹旁 · Z 连斩，C 闪避，S 防御',4);});
+      trigger(0,3730,()=>{this.spawn('beast',760,3530);this.spawn('beast',925,3480);this.message('空鞍马停在血迹旁 · A 连斩，D 闪避，S 防御',4);});
       trigger(1,3360,()=>{this.spawn('archer',850,3180);this.spawn('beast',1020,3140);this.message('前方传来呼救 · 猎人营地位于东侧');});
       trigger(2,3100,()=>{this.spawn('beast',940,2930);this.spawn('archer',1080,2790);});
       trigger(3,2680,()=>{this.spawn('shield',760,2450);this.spawn('archer',700,2130);this.message('溪流哨桥 · 三段重斩压制盾兵，绕过箭线');});
@@ -354,7 +354,7 @@ export class NightGame {
       if(this.stepDistance>=48){this.stepDistance%=48;this.particles(p.x,p.y,p.y>2220&&p.y<2350?'#a6c8c5':'#a5ab92',3);this.sound(p.y>2220&&p.y<2350?115:85,.035,'triangle',.009);}
     }
     this.updateAim(mx,my);
-    if((this.held.has(0)||this.keys.has('z'))&&p.atk<=0)this.action('attack');if((this.held.has(2)||this.keys.has('x'))&&p.atk<=0&&p.energy>0)this.action('ranged');this.updateEvents();this.updateChapterMechanics(dt);
+    if((this.held.has(0)||this.keys.has('a'))&&p.atk<=0)this.action('attack');if((this.held.has(2)||this.keys.has('x'))&&p.atk<=0&&p.energy>0)this.action('ranged');this.updateEvents();this.updateChapterMechanics(dt);
     for(const e of this.enemies){
       if(e.dead)continue;e.flash=Math.max(0,e.flash-dt);e.stun=Math.max(0,e.stun-dt);if(e.stun>0)continue;
       const dx=p.x-e.x,dy=p.y-e.y,d=Math.hypot(dx,dy),a=Math.atan2(dy,dx);if(d<490)e.active=true;if(!e.active)continue;
