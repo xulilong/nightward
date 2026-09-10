@@ -1,0 +1,39 @@
+NIGHTWARD / 逐夜之刃 — Third-party assets
+
+Knight.glb, Rogue_Hooded.glb
+Creator: Kay Lousberg / KayKit
+Pack: KayKit Character Pack: Adventurers 1.0
+License: CC0 1.0 Universal (see /models/KayKit-LICENSE.txt)
+Source: https://github.com/KayKit-Game-Assets/KayKit-Character-Pack-Adventures-1.0
+Retained as fallback assets and for rig validation; the current scene uses painted character atlases.
+
+Forest Ground 04, diffuse and OpenGL normal maps, 1K
+Creators: Rob Tuytel (photography, processing), Rico Cilliers (minor adjustment)
+License: CC0
+Source: https://polyhaven.com/a/forest_ground_04
+
+Mossy Cobblestone, diffuse and OpenGL normal maps, 1K
+Creator: Sơn Nguyễn
+License: CC0
+Source: https://polyhaven.com/a/mossy_cobblestone
+License details: https://polyhaven.com/license
+
+Cover art and art/hero.png, art/forest.png, art/enemies.png, art/wolf.png: AI-generated for this game.
+Atlas frame metadata is stored in art/frames.json. Chroma-key transparency is applied at runtime.
+Environment geometry, combat effects and UI: project source.
+
+Realism revision: hero and forest atlases replaced with generated realistic material/detail variants; wolf atlas is retained as an unused historical asset. Live creatures use the project-authored articulated 3D mist hound.
+
+art/hero_diagonal.png: AI-generated companion atlas, NE/SE/SW/NW poses matching the original hero.
+Current hero: project-authored 3D articulated character and animated cloth geometry. Hero sprite atlases remain historical assets and are no longer loaded during gameplay.
+
+2026-09-10 — public/textures/burned-oak-v1.png
+Original AI-generated weathered/charred oak albedo texture, generated with OpenAI built-in image generation for the independent Ash Village houses, roofs and timber. Copied unchanged from generated output. Flat colour texture only, not a complete scanned PBR material set.
+
+Village full-scene art v2 (2026-09-10)
+- art/village-buildings-v2.png: original AI-generated four-building atlas; layout corrected in a second built-in imagegen request.
+- art/village-props-v2.png: original AI-generated well, cart, wall, cage, supplies and vegetation atlas.
+- textures/village-wet-stone-v2.png: original AI-generated wet medieval cobblestone texture.
+All three use the approved original Nightward chapter-two concept as style reference. Scene compositing, keyed transparency, collision and animation are implemented separately in the game.
+
+Title screen art v2: art/title-background-v2.png, created using built-in imagegen from the approved original og.png; old typography removed for responsive in-game title rendering. Original cover retained. Prompt recorded in design/TITLE-POLISH.md.

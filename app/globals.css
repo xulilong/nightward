@@ -12,3 +12,196 @@
 .aim-button{font-size:10px!important;gap:7px!important;color:#b7c6ac!important}.aim-button>kbd{font-size:8px}.intro-keyboard{display:flex;align-items:center;gap:7px;font-size:9px;color:#97aa98;margin-top:17px}.intro-keyboard kbd{font-size:8px;color:#c6ccb1}.intro-keyboard+ .intro-notes{margin-top:12px}@media(max-width:1000px){.aim-button span{display:none}.intro-keyboard{margin-top:10px}}@media(max-width:640px){.aim-button{display:none!important}.intro-keyboard{font-size:7px;gap:4px;margin-top:7px}.intro-keyboard kbd{font-size:6px;padding:2px}.intro-keyboard+ .intro-notes{margin-top:7px}}
 
 .stage{max-width:min(1600px,calc((100svh - 165px)*16/9))}@media(max-width:1000px){.stage{max-width:min(1600px,calc((100svh - 115px)*16/9))}}
+
+/* The game owns the entire viewport. */
+html,body{height:100%;overflow:hidden}.game-shell{position:fixed;inset:0;width:100%;height:100dvh;min-height:0}.stage-wrap{position:absolute;inset:0;display:block;padding:0}.stage{width:100%;height:100%;max-width:none!important;aspect-ratio:auto;border:0;border-radius:0;box-shadow:none}.stage canvas{position:absolute;inset:0;width:100%;height:100%}.in-game-controls{position:absolute;right:25px;top:24px;display:flex;gap:8px;z-index:5;color:#d4ddca}.area-name{position:absolute;left:50%;top:28px;transform:translateX(-50%);text-align:center;pointer-events:none;text-shadow:0 2px 8px #000}.area-name small{display:block;font-size:10px;letter-spacing:4px;color:#c9c1a0}.area-name span{display:block;font-family:serif;font-size:19px;letter-spacing:6px;margin-top:7px;color:#e5ddc2}.quest{top:100px}.boss-hud{top:90px}.player-hud{top:24px}.intro-content{top:25%}.skillbar{bottom:25px}.game-toast{top:24%}@media(max-width:1000px){.stage-wrap{padding:0}.stage{max-width:none!important}.in-game-controls{right:15px;top:15px}.quest{top:70px}.area-name{top:20px}.area-name span{font-size:14px}}
+/* Fullscreen game HUD, without surrounding webpage chrome. */
+.game-shell{background:#152a2c}.splash-screen{position:absolute;inset:0;z-index:30;background:#102023;overflow:hidden}.splash-art{position:absolute;width:100%;height:100%;object-fit:cover;object-position:center}.splash-shade{position:absolute;inset:0;background:linear-gradient(0deg,#071b2299,transparent 45%)}.splash-actions{position:absolute;left:65%;top:70%;transform:translateX(-50%);width:340px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:13px}.splash-actions .start-button{min-width:235px;height:53px!important;background:linear-gradient(120deg,#d9b879,#f5dfaa,#bea064)!important;border:1px solid #f6dd9a!important;border-radius:2px!important;box-shadow:0 0 30px #d3b77930,inset 0 0 0 3px #6b562e22;font-family:serif;font-size:19px!important;font-weight:400!important;letter-spacing:5px}.splash-actions .start-button kbd{font-family:Arial;font-size:12px;color:#3b3d31;border:1px solid #6b623c77;margin-left:10px}.splash-actions p{font-size:11px;letter-spacing:1px;color:#d3d9cc;text-shadow:0 2px 7px #000;margin:5px 0 0}.splash-actions small{font-size:10px;color:#a3bcb3;letter-spacing:1px}.loading-track{height:3px;width:260px;background:#788a7855;box-shadow:0 0 0 1px #d2c58d33}.loading-track>span{display:block;height:100%;background:#ead3a1;box-shadow:0 0 10px #efdda655;transition:width .25s}.splash-actions p>span{margin-left:15px;color:#d9c59a}.load-error{line-height:1.8}.in-game-controls{padding:6px 9px;border:1px solid #b8ccaf33;background:linear-gradient(180deg,#13283188,#091a2366);border-radius:25px;backdrop-filter:blur(8px)}.in-game-controls .pause-button{border:0!important;background:transparent!important}.in-game-controls .pause-button span{display:none}.in-game-controls button{color:#cddcd2}.area-name{text-shadow:0 2px 9px #0009}.player-hud{left:28px;gap:13px;filter:drop-shadow(0 3px 6px #15272555)}.player-badge{width:60px;height:60px;border:2px solid #c1ac7c;background:radial-gradient(circle at 40% 30%,#558685,#142c38 70%);box-shadow:0 0 0 3px #102a36dd,inset 0 0 15px #071e2dcc}.player-badge svg{width:29px;height:29px;color:#efd9a4}.player-bars{width:235px}.player-label>b{font-size:22px}.player-label>span{font-size:9px;color:#dde4d3}.health-track{height:9px;background:#162923bb;border:1px solid #d4d4a366}.health-track>div{background:linear-gradient(0deg,#5c8b62,#c1d99a)}.energy-row{margin-top:8px}.energy-row>span{width:34px;height:5px}.quest{border:0;background:linear-gradient(90deg,transparent,#10252b66);width:250px;right:26px;padding:13px 16px}.quest strong{font-size:14px;font-family:serif;letter-spacing:2px}.quest small{color:#d3dccc}.quest p{color:#c2cfbb}.quest-progress{background:#e0d5b32b}.in-world-hint{position:absolute;left:28px;bottom:24px;color:#d6dfd3;font-size:10px;letter-spacing:2px;text-shadow:0 1px 7px #000;pointer-events:none}.in-world-hint>span{margin:0 9px;opacity:.6}.skillbar{gap:15px;background:linear-gradient(0deg,#10242ca8,transparent);border:0;border-radius:0;padding:16px 30px 10px;backdrop-filter:none;bottom:15px;align-items:flex-end}.skill{width:71px;height:71px!important;border-radius:50%!important;border:2px solid #b4a06a!important;background:radial-gradient(circle at 35% 25%,#33536b,#152e3e 67%,#081622)!important;box-shadow:inset 0 0 0 3px #152d30,inset 0 0 18px #52747a99,0 3px 10px #06172199;overflow:visible;gap:2px!important;position:relative}.skill:nth-child(1){width:83px;height:83px!important}.skill:nth-child(2){background:radial-gradient(circle at 35% 25%,#528e96,#194856 60%,#0b2334)!important}.skill:nth-child(4){background:radial-gradient(circle at 35% 25%,#497594,#233f68 60%,#0e233d)!important}.skill:nth-child(5){background:radial-gradient(circle at 35% 25%,#7b6089,#423354 60%,#232239)!important}.skill kbd{top:-7px;right:0;color:#f8e4b4;background:#23333c;border:1px solid #ad9869;border-radius:50%;width:21px;height:21px;font-size:10px;display:grid;place-items:center;box-shadow:0 1px 4px #0007}.skill>svg{width:29px!important;height:29px!important;color:#e8f5e6;filter:drop-shadow(0 0 5px #95c8ce77);margin:0 0 3px}.skill>span{font-size:8px;letter-spacing:0;color:#d7e9df}.skill.cooling{opacity:.6;border-color:#53695e!important}.skill:hover{box-shadow:0 0 17px #d3e6b977,inset 0 0 18px #69919a99}.boss-hud{width:31%;top:94px}.boss-hud strong{font-size:20px}.boss-hud>div{height:7px;border-color:#e2ad7866}.game-toast{top:23%;background:linear-gradient(90deg,transparent,#092535bb,transparent);border:0;padding:17px 60px;font-family:serif;font-size:18px;line-height:1.7;text-shadow:0 2px 8px #000;min-width:420px}.interact-prompt{bottom:150px;background:#0d2c38d9;border-color:#d8bc83;border-radius:2px;padding:10px 18px;color:#f3e1b6}.modal-backdrop{background:#071a2688;backdrop-filter:blur(12px)}.modal{padding:35px 40px;background:linear-gradient(145deg,#152c34dd,#112832dd);border-top:1px solid #b7a17088;border-bottom:1px solid #b7a17088}.upgrade-card{background:linear-gradient(145deg,#314851f2,#0d2732f2)!important;border-color:#a38c5c99!important;box-shadow:0 10px 30px #00101e55}.upgrade-card>span kbd{margin-right:8px}.notice{z-index:50}
+@media(max-width:1000px){.player-hud{left:16px;top:18px}.player-badge{width:44px;height:44px}.player-bars{width:182px}.quest{top:83px;width:200px;right:10px}.in-world-hint{left:18px;font-size:8px;bottom:16px}.skillbar{bottom:8px;padding:14px 12px 8px;gap:11px}.skill{width:58px;height:58px!important}.skill:nth-child(1){width:67px;height:67px!important}.skill>svg{width:24px!important;height:24px!important}.game-toast{font-size:14px;min-width:310px;padding:10px 30px}.splash-actions{width:300px}.splash-actions .start-button{min-width:190px;height:43px!important;font-size:16px!important}.splash-actions p{font-size:9px}.splash-actions small{font-size:8px}.boss-hud{top:70px}.boss-hud strong{font-size:16px}}
+@media(max-width:640px){.area-name{top:20px}.area-name small{display:none}.area-name span{font-size:11px;letter-spacing:2px}.in-game-controls{right:8px;top:8px;padding:3px;gap:0}.in-game-controls .pause-button kbd{display:none}.in-game-controls button{width:29px;height:28px!important}.player-hud{top:12px;left:10px}.player-badge{display:none}.player-bars{width:130px}.player-label>span{display:none}.player-label>b{font-size:17px}.health-track{height:6px}.quest{top:60px;width:168px}.quest strong{font-size:11px}.quest p{font-size:8px}.skillbar{gap:8px}.skill{width:46px;height:46px!important}.skill:nth-child(1){width:54px;height:54px!important}.skill>svg{width:20px!important;height:20px!important}.skill>span{font-size:6px}.skill kbd{width:17px;height:17px;font-size:8px}.in-world-hint{display:none}.splash-actions{left:63%;top:69%;width:240px;gap:6px}.splash-actions .start-button{min-width:150px;height:35px!important;font-size:13px!important}.splash-actions p{font-size:7px;letter-spacing:0}.splash-actions small{font-size:7px}.game-toast{min-width:230px;max-width:80%;font-size:11px;padding:7px 15px}.interact-prompt{bottom:94px;padding:6px 10px;font-size:9px}.boss-hud{top:55px}.boss-hud strong{font-size:13px}.modal{padding:20px}.loading-track{width:180px}}
+/* Cover entry: smoked teal, fine brass detailing and lantern light. */
+.splash-actions .enter-mist-button {
+  position: relative;
+  isolation: isolate;
+  width: 258px;
+  min-height: 54px;
+  padding: 0 25px;
+  display: flex;
+  justify-content: space-between;
+  gap: 22px;
+  border: 1px solid #bba272a6;
+  border-radius: 1px;
+  background: radial-gradient(ellipse at 50% 110%, #a7813840, transparent 70%), linear-gradient(180deg, #20373aee, #10262bef);
+  color: #ecdbb6;
+  box-shadow: inset 0 0 0 3px #0e20288c, inset 0 0 0 4px #bda27224, 0 8px 24px #03161c66;
+  font-family: 'Songti SC', 'Noto Serif SC', serif;
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: 5px;
+  text-indent: 5px;
+  text-shadow: 0 1px 8px #e9bf6326;
+  transition: border-color .25s, box-shadow .25s, color .25s, transform .2s;
+}
+.enter-mist-button::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 18%;
+  right: 18%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #f3dcaa, transparent);
+  box-shadow: 0 0 9px #e8c77c66;
+  pointer-events: none;
+}
+.enter-mist-button .entry-ornament {
+  flex: 0 0 5px;
+  width: 5px;
+  height: 5px;
+  border: 1px solid #ccb17ba6;
+  transform: rotate(45deg);
+  box-shadow: 0 0 7px #ddb97430;
+}
+.splash-actions .enter-mist-button:hover {
+  background: radial-gradient(ellipse at 50% 110%, #ad843352, transparent 80%), linear-gradient(180deg, #2a4446f5, #152d31f5);
+  color: #fff0ce;
+  border-color: #e7cc92;
+  box-shadow: inset 0 0 0 3px #0e20288c, inset 0 0 0 4px #bda27240, 0 0 26px #dbb66526, 0 8px 24px #03161c66;
+  transform: translateY(-1px);
+}
+.splash-actions .enter-mist-button:focus-visible {
+  outline: 2px solid #eed5a1;
+  outline-offset: 5px;
+}
+.splash-actions .enter-mist-button:active { transform: translateY(1px); }
+.entry-key-hint { display: flex; align-items: center; gap: 8px; color: #c2cabc; font-size: 10px; letter-spacing: 2px; text-shadow: 0 1px 5px #061619; }
+.entry-key-hint > span { opacity: .5; }
+.entry-key-hint kbd { color: #dbc79f; border-color: #bba27266; background: #10292b80; padding: 1px 5px; font-size: 10px; letter-spacing: 0; }
+.splash-actions .entry-controls { color: #aebfb7; font-size: 10px; line-height: 2; margin: 0; }
+@media(max-width:1000px) {
+  .splash-actions .enter-mist-button { width: 222px; min-height: 46px; font-size: 17px; }
+  .splash-actions .entry-controls { font-size: 9px; }
+}
+@media(max-width:640px), (max-height:540px) {
+  .splash-actions .enter-mist-button { width: 182px; min-height: 40px; font-size: 15px; padding: 0 18px; gap: 12px; }
+  .entry-key-hint { font-size: 8px; gap: 5px; letter-spacing: 1px; }
+  .splash-actions .entry-controls { font-size: 7px; line-height: 1.8; }
+  .splash-actions { gap: 7px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .splash-actions .enter-mist-button { transition: none; }
+  .splash-actions .enter-mist-button:hover, .splash-actions .enter-mist-button:active { transform: none; }
+}
+
+/* Campaign HUD stays within the game surface. */
+.route-map{position:absolute;right:30px;top:240px;width:152px;padding:13px 14px;color:#d2ddd3;background:linear-gradient(110deg,#0b202454,#0b2024c9);border-right:1px solid #b8a57866;pointer-events:none;text-shadow:0 1px 4px #000}
+.route-map-title{display:flex;align-items:center;gap:7px;font-size:10px;letter-spacing:1px}.route-map-title>b{margin-left:auto;font-weight:400;color:#d9bd80}
+.route-line{position:relative;margin:25px 0 23px 8px;height:145px;border-left:1px solid #b8c9bf4a}.route-line>i{position:absolute;bottom:0;left:-1px;width:1px;background:#dcbd80;box-shadow:0 0 8px #ffd18a66}.route-line>span{position:absolute;left:-4px;font-size:9px;color:#8ea49d;display:flex;align-items:center;gap:10px;transform:translateY(50%);white-space:nowrap}.route-line>span em{width:7px;height:7px;background:#183b3d;border:1px solid #91a89e;transform:rotate(45deg)}.route-line>span.visited{color:#e5d7b2}.route-line>span.visited em{background:#d3b880;border-color:#e8d5a9}.route-position{position:absolute;width:11px;height:11px;left:-6px;background:#eaffea;border-radius:50%;box-shadow:0 0 9px #dcffe1;transform:translateY(50%)}.route-map>small{font-size:8px;color:#9bb5ad}
+.heal-button{position:absolute;left:30px;bottom:75px;z-index:4;background:#102e31b5!important;border:1px solid #bdab7455!important;color:#ccdbc5!important;gap:9px!important;font-size:11px!important}.heal-button b{color:#edd294;margin-left:6px}.heal-button:disabled{opacity:.4}
+.critical-health{position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 100px #b1232244;z-index:2}
+.campaign-menu{display:flex;align-items:center;flex-direction:column;gap:7px;color:#d1c5a5;font-size:10px;letter-spacing:1px}.difficulty-switch{display:flex;align-items:center;gap:4px}.difficulty-switch button{padding:4px 12px;background:#0b222aaa;border:1px solid #697b6c55;border-radius:2px;color:#a9bfb7;font-size:10px}.difficulty-switch button[aria-pressed=true]{border-color:#d3b57a;color:#f1dbad;background:#47513a66}.difficulty-switch kbd{margin-left:6px;font-size:8px}.continue-button{color:#e9c98d!important;height:27px!important;font-size:11px!important}.splash-actions{gap:8px}
+.chapter-results{width:min(600px,90vw);padding:35px 42px;border-top:1px solid #ba9f6388;border-bottom:1px solid #ba9f6388;background:linear-gradient(120deg,#102831ef,#1b3032ed);color:#e9e3d0;text-align:center}.chapter-results>small{color:#aebfb3;letter-spacing:3px}.chapter-results h2{font-family:serif;font-weight:400;font-size:30px;letter-spacing:3px;margin:17px 0}.chapter-results>p{white-space:pre-line;font-size:13px;line-height:2;color:#b7c9bc}.chapter-record{display:flex;align-items:center;justify-content:center;gap:22px;margin:22px 0;border-block:1px solid #80917d3d;padding:15px}.chapter-record>b{font-family:serif;font-size:62px;line-height:1;color:#e1c28a;text-shadow:0 0 24px #daa63b33}.chapter-record>div{display:flex;flex-direction:column;gap:10px;text-align:left}.chapter-record strong{font-size:22px;font-weight:400}.chapter-record strong span{font-size:10px;color:#9aada3;margin-left:7px}.chapter-record>div>span{font-size:11px;color:#bac6b4}.chapter-next{color:#e5cc9c!important}.chapter-next small{font-size:10px;color:#91a99f}.chapter-results .start-button{margin:auto}.campaign-records{display:grid;gap:7px;margin:18px 0}.campaign-records>div{display:flex;align-items:center;gap:12px;padding:8px 14px;background:#061b2355;border-bottom:1px solid #a4a58a33}.campaign-records b{font:24px Georgia,serif;color:#e8c991}.campaign-records span{font-size:12px}.campaign-records small{font-size:10px;color:#a7b9af;margin-left:auto}
+@media(max-height:750px){.route-map{top:200px;width:125px;right:20px;padding:10px}.route-line{height:105px;margin-block:20px}.chapter-results{padding:22px 30px}.chapter-record{margin:12px 0;padding:10px}.chapter-results h2{font-size:25px}.chapter-results>p{font-size:12px}}
+@media(max-width:1000px){.route-map{display:none}.heal-button{left:16px;bottom:60px}.campaign-menu{font-size:8px}.splash-actions .entry-controls{display:none}}
+@media(max-height:540px){.route-map{display:none}.chapter-results{padding:12px 25px;max-height:95svh;overflow-y:auto}.chapter-results h2{font-size:21px;margin:8px}.chapter-record>b{font-size:40px}.heal-button{bottom:15px;left:12px;padding:6px!important}.heal-button>span{font-size:9px}}
+.village-mini{height:190px;position:relative;background:#574d4080;margin:12px -4px;border:1px solid #a38a5d55}.village-mini>i{position:absolute;background:#151b1bdd;border:1px solid #a9997a66}.village-mini>span{position:absolute;font-size:8px;color:#ffc786;border:1px solid #e4a251;background:#493926;border-radius:50%;width:13px;height:13px;text-align:center;transform:translate(-50%,-50%)}.village-mini>span.rescued{color:#b4d8b5;border-color:#7bab88;background:#294838}.village-mini>b{position:absolute;width:7px;height:7px;border-radius:50%;background:#fff5d1;box-shadow:0 0 6px #fff;transform:translate(-50%,-50%)}.chapter-select-link{color:#d9c59e!important;font-size:10px!important;height:24px!important}.dialogue-backdrop{position:absolute;inset:0;background:linear-gradient(0deg,#05131de0,transparent 80%);display:flex;align-items:flex-end;justify-content:center;padding:5vh 20px;z-index:30}.story-dialogue{width:min(760px,95%);padding:24px 32px;background:#142931f5;border-top:1px solid #c3a47788;box-shadow:0 10px 50px #0006}.story-dialogue>small{letter-spacing:4px;color:#9fae9e;font-size:10px}.story-dialogue h2{font:24px serif;color:#e5cf9d;margin:10px 0}.story-dialogue p{white-space:pre-line;line-height:1.9;color:#d1d8ca;font-size:14px}.story-dialogue>div{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}.story-dialogue button{background:#243c3d;color:#e5d6b7;border-color:#9e916155;font-size:12px}.catalog-panel{width:min(850px,94vw);max-height:92svh;overflow:auto;padding:25px;background:#132830f5;border:1px solid #a8976955;text-align:center}.catalog-panel h2{font:28px serif;color:#e3c99c;letter-spacing:3px}.catalog-panel>p{font-size:12px;color:#a5b9ac}.catalog-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}.catalog-grid button{height:115px!important;display:flex;flex-direction:column;align-items:start;gap:9px;background:#263b3c!important;border-color:#ac976366!important;padding:15px!important}.catalog-grid button:disabled{opacity:.45;background:#18292d!important}.catalog-grid small{font:20px Georgia;color:#c8ad77}.catalog-grid strong{font:16px serif;color:#e0dfce}.catalog-grid span{display:flex;gap:5px;font-size:9px;color:#9eb4a8}.coming-next{color:#dcc393!important}.coming-next small{color:#8da598}.chapter-catalog{z-index:45}
+@media(max-width:700px){.catalog-grid{grid-template-columns:repeat(2,1fr)}.catalog-grid button{height:90px!important}.story-dialogue{padding:16px}.story-dialogue p{font-size:12px}.story-dialogue h2{font-size:20px}.dialogue-backdrop{padding:15px}}
+
+.village-mini{background:#0d2021}.village-mini>svg{position:absolute;inset:0;width:100%;height:100%;color:#7c88734a;pointer-events:none}.village-mini::before,.village-mini::after{display:none}
+/* Journey title screen: live typography over the approved, text-free artwork. */
+.splash-shade{background:linear-gradient(90deg,transparent 32%,#06171b30 58%,#06171b12),linear-gradient(0deg,#051216b8,transparent 58%)}
+.title-composition{position:absolute;top:17%;left:65%;transform:translateX(-50%);width:min(48vw,700px);text-align:center;color:#eddfbc;text-shadow:0 3px 24px #031013;pointer-events:none}
+.title-kicker{font:10px Georgia,serif;letter-spacing:.48em;color:#b4b9a6;margin:0 0 18px}.title-composition h1{font-family:'Songti SC','STSong','Noto Serif SC',serif;font-size:clamp(56px,6.4vw,116px);font-weight:500;letter-spacing:.13em;text-indent:.13em;line-height:1.15;margin:0;color:#e9dcb9;text-shadow:0 2px 1px #263c3b,0 7px 30px #021518}
+.title-rule{display:flex;align-items:center;justify-content:center;gap:18px;margin:18px auto 16px;width:62%;color:#b5a071}.title-rule span{height:1px;flex:1;background:linear-gradient(90deg,transparent,#b5a071)}.title-rule span:last-child{transform:rotate(180deg)}.title-rule svg{width:20px;height:20px;stroke-width:1.2}.title-promise{font:clamp(15px,1.6vw,24px) 'Songti SC',serif;letter-spacing:.35em;text-indent:.35em;margin:0}.title-story{font:12px/2 'Songti SC',serif;letter-spacing:2px;color:#b5c3b9;margin:21px 0 0}
+.splash-actions{left:65%;top:58%;width:min(420px,42vw);gap:10px}.splash-actions .enter-mist-button{width:286px;min-height:56px;background:linear-gradient(180deg,#233b3bcf,#0d2429df);box-shadow:inset 0 0 0 3px #07191b88,0 8px 32px #00101355;border-color:#b9a378a8;font-size:20px;letter-spacing:6px}.splash-actions>.chapter-select-link{order:4;font-size:11px!important;letter-spacing:2px;margin-top:3px}.splash-actions .entry-controls{opacity:.7;font-size:9px;margin-top:5px}.campaign-menu{margin-top:8px;gap:8px}.campaign-menu>span{font-size:10px;color:#c6c8b3}.campaign-menu>small{display:none}.entry-key-hint{font-size:9px;opacity:.8}
+.title-mist{position:absolute;inset:25% -10% -10%;pointer-events:none;background:radial-gradient(ellipse at 70% 60%,#9ec8c409,transparent 45%);animation:title-breathe 13s ease-in-out infinite alternate}.title-composition{animation:title-reveal 1.2s ease-out both}@keyframes title-reveal{from{opacity:0;filter:blur(3px)}to{opacity:1;filter:blur(0)}}@keyframes title-breathe{to{transform:translate3d(-2%,1%,0);opacity:.4}}
+.context-guidance{position:absolute;bottom:134px;left:50%;transform:translateX(-50%);max-width:70%;padding:9px 20px;color:#d8dcc7;background:linear-gradient(90deg,transparent,#102529ce,transparent);font-size:11px;line-height:1.6;letter-spacing:1px;pointer-events:none;text-align:center}
+.game-toast{font-size:14px;min-width:0;width:max-content;max-width:56%;padding:12px 28px;top:19%;line-height:1.8}.rescue-ledger{display:grid;gap:8px;margin:12px 0;border-top:1px solid #c0aa722b;padding-top:10px}.rescue-ledger>div{display:flex;gap:8px;font-size:10px;color:#bcbca3}.rescue-ledger p{margin:0;line-height:1.6}.rescue-ledger p small{display:block;font-size:8px;color:#83968c}.rescue-ledger .done{color:#b9d0a4}.rescue-ledger .done small{color:#829f81}.journey-outcomes{display:grid;gap:7px;border-block:1px solid #bba47833;padding:13px 0;margin:18px 0;color:#b7c5ad;font-size:11px;line-height:1.5}
+@media(max-height:760px){.title-composition{top:12%}.title-composition h1{font-size:clamp(50px,6vw,86px)}.title-kicker{margin-bottom:10px}.title-story{margin-top:12px}.title-rule{margin:12px auto}.splash-actions{top:56%;gap:6px}.splash-actions .enter-mist-button{min-height:46px}.campaign-menu{gap:5px;margin-top:4px}.splash-actions .entry-controls{display:none}.rescue-ledger{gap:4px}.village-mini{height:140px}}
+@media(max-width:800px){.title-composition{left:62%;width:66vw;top:16%}.title-composition h1{font-size:clamp(42px,7.5vw,68px)}.title-story{font-size:10px}.title-promise{font-size:15px;letter-spacing:.18em}.splash-actions{left:62%;width:65vw}.splash-actions .enter-mist-button{width:230px;font-size:18px}.context-guidance{bottom:100px;font-size:9px;max-width:86%;width:max-content}.game-toast{max-width:74%;font-size:12px}.title-kicker{font-size:8px}}
+@media(max-width:540px){.title-composition,.splash-actions{left:50%;width:90vw}.splash-shade{background:linear-gradient(0deg,#04171bea,transparent 100%)}.title-composition{top:17%}.splash-actions{top:56%}}
+@media(prefers-reduced-motion:reduce){.title-mist,.title-composition{animation:none}}
+
+/* Menu atmosphere: compositor-only motion; removed when the campaign starts. */
+.title-atmosphere{position:absolute;inset:0;overflow:hidden;pointer-events:none;contain:paint}
+.title-fog{position:absolute;inset:0 -8%;background-repeat:no-repeat;pointer-events:none}
+.title-fog-distant{background:radial-gradient(ellipse at 66% 48%,#bbdbd52b,transparent 38%),radial-gradient(ellipse at 88% 68%,#a1c5c426,transparent 32%);animation:title-fog-distant 26s ease-in-out infinite alternate}
+.title-fog-near{top:45%;bottom:-12%;background:radial-gradient(ellipse at 24% 76%,#c1d8cd30,transparent 40%),radial-gradient(ellipse at 75% 70%,#91baba2b,transparent 46%);animation:title-fog-near 19s ease-in-out infinite alternate}
+.title-lantern-haze{position:absolute;left:8%;top:19%;width:38%;height:65%;background:radial-gradient(ellipse,#e6aa4d16,transparent 64%);animation:title-lantern-pulse 6s ease-in-out infinite alternate}
+.title-mote{position:absolute;width:var(--mote-size);height:var(--mote-size);border-radius:50%;background:#ffe3a6;box-shadow:0 0 6px 2px #e4b65b55;opacity:0;animation:title-mote-drift var(--mote-duration) linear var(--mote-delay) infinite}
+.title-mote-cool{background:#c8e8de;box-shadow:0 0 6px 2px #b3ddd644}
+.splash-screen .title-rule svg{animation:title-emblem-glow 5s ease-in-out infinite alternate}
+@keyframes title-fog-distant{from{transform:translate3d(-3%,-1%,0);opacity:.35}to{transform:translate3d(3%,2%,0);opacity:.85}}
+@keyframes title-fog-near{from{transform:translate3d(4%,2%,0);opacity:.35}to{transform:translate3d(-4%,-2%,0);opacity:.8}}
+@keyframes title-lantern-pulse{0%,100%{opacity:.35;transform:scale(.94)}45%{opacity:.85;transform:scale(1.06)}70%{opacity:.65;transform:scale(1.02)}}
+@keyframes title-mote-drift{0%{opacity:0;transform:translate3d(0,0,0)}18%{opacity:.65}50%{opacity:.35}75%{opacity:.7}100%{opacity:0;transform:translate3d(var(--mote-drift),calc(-1 * var(--mote-rise)),0)}}
+@keyframes title-emblem-glow{from{opacity:.55}to{opacity:1}}
+.splash-screen[data-motion-paused=true] .title-atmosphere *,
+.splash-screen[data-motion-paused=true] .title-composition,
+.splash-screen[data-motion-paused=true] .title-rule svg{animation-play-state:paused}
+@media(max-width:700px){.title-mote:nth-of-type(n+12){display:none}.title-fog-near{opacity:.4}}
+@media(prefers-reduced-motion:reduce){.title-atmosphere{display:none}.splash-screen .title-rule svg{animation:none}}
+
+/* Nightward interface: blackened metal, aged brass and restrained lantern light. */
+.game-shell{--ui-brass:#b5a078;--ui-ivory:#e4d8bc;--ui-quiet:#9caa9f;--ui-edge:#b5a07850;--ui-metal:linear-gradient(155deg,#343b37 0%,#1c2626 34%,#101b1e 72%,#252d29 100%)}
+.game-shell button{touch-action:manipulation;transition:color .18s,border-color .18s,background .18s,box-shadow .18s,transform .12s}
+.game-shell button:focus-visible{outline:1px solid #efdab0;outline-offset:4px;box-shadow:0 0 0 2px #0b161b!important}
+.game-shell kbd{font:10px Georgia,serif;border-radius:1px;color:var(--ui-ivory);border-color:var(--ui-edge)}
+.game-shell .splash-actions .enter-mist-button,.game-shell .start-button{border:1px solid #b5a07899!important;border-radius:1px!important;background:radial-gradient(ellipse at 50% 120%,#ba945a23,transparent 65%),var(--ui-metal)!important;color:var(--ui-ivory)!important;box-shadow:inset 0 1px #e8ddba24,inset 0 0 0 4px #080f1355,inset 0 -1px #0009,0 10px 30px #0005!important;font-family:'Songti SC','STSong',serif;font-weight:400!important;letter-spacing:5px}
+.game-shell .splash-actions .enter-mist-button:hover,.game-shell .start-button:hover{border-color:#d2bb88!important;box-shadow:inset 0 1px #efdbb340,inset 0 0 0 4px #080f1344,0 0 24px #c7a56316!important;color:#fff0cc!important;transform:translateY(-1px)}
+.game-shell .enter-mist-button[data-held=true],.game-shell .enter-mist-button:active,.game-shell .start-button:active{transform:translateY(1px);box-shadow:inset 0 3px 12px #0009!important}
+.game-shell .difficulty-switch{gap:0;border-bottom:1px solid var(--ui-edge)}
+.game-shell .difficulty-switch button{border:0;border-radius:0;background:transparent;padding:6px 15px;color:#929c90}
+.game-shell .difficulty-switch button[aria-pressed=true]{background:linear-gradient(0deg,#b5a0781f,transparent);color:#ead5ac;box-shadow:inset 0 -1px #c1a875}
+.game-shell .difficulty-switch kbd{border:0;opacity:.6}
+.game-shell .chapter-select-link,.game-shell .continue-button{border-radius:0;background:transparent!important;color:#b8b3a2!important}
+.game-shell .chapter-select-link:hover,.game-shell .continue-button:hover{color:#f1ddb6!important;text-shadow:0 0 12px #d6b26d55}
+/* Equipment plaques keep keyboard labels and skill identity visible during recovery. */
+.game-shell .skillbar{bottom:20px;gap:8px;padding:15px 22px 9px;background:linear-gradient(0deg,#081114cc,transparent);border:0;border-bottom:1px solid #b5a07845;border-radius:0;backdrop-filter:none;align-items:flex-end}
+.game-shell .skillbar::before,.game-shell .skillbar::after{content:'';position:absolute;bottom:-2px;width:4px;height:4px;background:#b5a078;transform:rotate(45deg)}
+.game-shell .skillbar::before{left:0}.game-shell .skillbar::after{right:0}
+.game-shell .skillbar .skill{width:68px;height:78px!important;padding:8px 6px 6px!important;gap:5px!important;border:1px solid var(--ui-edge)!important;border-radius:2px!important;background:var(--ui-metal)!important;box-shadow:inset 0 1px #e4d4b218,inset 0 0 0 3px #060f1355,0 4px 9px #0005;opacity:1;overflow:visible;transform:none}
+.game-shell .skillbar .skill:first-child{width:76px;height:86px!important;border-color:#bca57899!important;margin-right:5px}
+.game-shell .skillbar .skill kbd{top:-7px;right:6px;width:18px;height:17px;border:1px solid #b5a07880;border-radius:1px;background:#172022;color:#d6c6a4;font-size:10px;box-shadow:0 2px 4px #0009;z-index:3}
+.game-shell .skillbar .skill-emblem{position:relative;display:grid;place-items:center;width:42px;height:42px;overflow:hidden;border-bottom:1px solid #d4c19433;background:radial-gradient(ellipse at bottom,#b7a16a16,transparent 70%)}
+.game-shell .skill-emblem>svg{width:27px;height:27px;color:#ddd0ae;stroke-width:1.35;filter:drop-shadow(0 2px 2px #0009)}
+.game-shell .skillbar .skill-name{font-family:'Songti SC','STSong',serif;font-size:10px;letter-spacing:1px;color:#bfc1b1;line-height:1.3}
+.game-shell .skillbar .skill:hover:not(:disabled){border-color:#d5c092!important;box-shadow:inset 0 1px #fff1c733,0 0 16px #c0a36c22;transform:translateY(-2px)}
+.game-shell .skillbar .skill[data-held=true],.game-shell .skillbar .skill:active{transform:translateY(2px);border-color:#e0c995!important;box-shadow:inset 0 3px 12px #000b,0 0 9px #cda86028}
+.game-shell .skillbar .skill[data-held=true] .skill-emblem>svg{color:#fff1c9}
+.game-shell .skillbar .skill.cooling{border-color:#68746a66!important}
+.game-shell .skill-cooldown{position:absolute;inset:0;background:#050c10cd;transform-origin:top;border-bottom:1px solid #c8b27d88;transition:transform .1s linear}
+.game-shell .skill-countdown{position:absolute;inset:0;display:grid;place-items:center;font:19px Georgia,serif;color:#ecdfbe;text-shadow:0 2px 4px #000}
+.game-shell .skillbar .skill-locked{opacity:.5;border-color:#6a73644d!important}
+.game-shell .skill-locked .skill-emblem>svg:first-child{opacity:.2}
+.game-shell .skill-emblem .skill-lock-mark{position:absolute;width:15px;height:15px;color:#c6b99c}
+/* One interaction target, with no nested web-style action button. */
+.game-shell .interact-prompt{bottom:140px;border:0;border-radius:0;background:transparent;padding:0;max-width:min(560px,90vw);white-space:normal}
+.game-shell .world-interaction{height:auto;min-height:44px;padding:9px 20px!important;gap:13px!important;background:linear-gradient(90deg,#0b151b22,#101b1ef2 18%,#101b1ef2 82%,#0b151b22)!important;border:0;border-block:1px solid #b5a07855;border-radius:0;color:#e2d5b6;font:14px/1.6 'Songti SC','STSong',serif;letter-spacing:1px;white-space:normal;text-align:left;text-shadow:0 2px 4px #000}
+.game-shell .world-interaction kbd{display:grid;place-items:center;width:25px;height:27px;flex-shrink:0;background:var(--ui-metal);box-shadow:inset 0 1px #dcc79a22,0 2px 4px #0007}
+.game-shell .world-interaction>svg{opacity:.55;width:13px}
+.game-shell .world-interaction:hover,.game-shell .world-interaction[data-held=true]{color:#fff0cc;border-color:#dcc493;background:#152022ee!important}
+.game-shell .world-interaction[data-held=true] kbd{transform:translateY(1px);box-shadow:inset 0 2px 5px #0009}
+/* Lighter HUD and a common material language for menus. */
+.game-shell .player-badge{width:43px;height:52px;border:1px solid #b5a07888;border-radius:2px 2px 18px 18px;background:var(--ui-metal);box-shadow:inset 0 0 0 3px #09131988,0 4px 12px #0005;color:#c8af7b}
+.game-shell .player-badge svg{width:24px;stroke-width:1.4}
+.game-shell .player-bars{width:224px}.game-shell .player-label>span{color:#a4aea0;font-size:8px}
+.game-shell .health-track{height:7px;border:1px solid #b5a07866;background:#080f12;box-shadow:0 2px 6px #0007}
+.game-shell .health-track>div{background:linear-gradient(0deg,#4d6e59,#a4b28a);box-shadow:inset 0 1px #dfdfb933}
+.game-shell .energy-row>span{height:3px;width:29px;border:0;background:#32433d}
+.game-shell .energy-row .charged{background:#a7c1b3;box-shadow:0 0 5px #b3cfb922}
+.game-shell .energy-row small{color:#85968c;font-size:8px}
+.game-shell .quest{background:linear-gradient(90deg,transparent,#0c181ba6);border-right:1px solid var(--ui-edge);padding:10px 14px;width:230px}
+.game-shell .quest strong{font-size:13px;line-height:1.7;color:#ddd5bd;letter-spacing:1px}
+.game-shell .quest>small{color:#a1ab9b;font-size:8px}.game-shell .quest p{font-size:8px;color:#8f9e91}.game-shell .quest-progress{height:1px;margin-top:10px}
+.game-shell .route-map{background:linear-gradient(90deg,transparent,#0c181b99);border-color:var(--ui-edge)}
+.game-shell .in-game-controls{border:0;border-bottom:1px solid #b5a07840;border-radius:0;background:linear-gradient(90deg,transparent,#0b151baa);box-shadow:none;padding:4px 8px}
+.game-shell .in-game-controls button{background:transparent!important;border:0!important;border-radius:1px;color:#a8b1a3!important}
+.game-shell .in-game-controls button:hover{color:#ead5ac!important;background:#b5a07812!important}
+.game-shell .heal-button{border-radius:1px!important;border:1px solid var(--ui-edge)!important;background:var(--ui-metal)!important;color:#c9ccb9!important;box-shadow:inset 0 1px #e4d4b212;font-family:'Songti SC','STSong',serif}
+.game-shell .heal-button[data-held=true]:not(:disabled){transform:translateY(1px);box-shadow:inset 0 2px 8px #0009}
+.game-shell .modal,.game-shell .catalog-panel,.game-shell .chapter-results,.game-shell .story-dialogue{background:radial-gradient(ellipse at 50% 0,#b5a0780d,transparent 65%),linear-gradient(145deg,#202a29f7,#0c171cf7);border-color:#b5a07866;border-radius:1px;box-shadow:inset 0 1px #e4d4b21c,0 25px 90px #0006}
+.game-shell .story-dialogue button,.game-shell .catalog-grid button,.game-shell .upgrade-card{border-radius:1px!important;background:var(--ui-metal)!important;border-color:var(--ui-edge)!important;color:var(--ui-ivory);box-shadow:inset 0 1px #e4d4b21a}
+.game-shell .story-dialogue button:hover,.game-shell .catalog-grid button:hover:not(:disabled),.game-shell .upgrade-card:hover{border-color:#d5bc88!important;background:linear-gradient(145deg,#394038,#152125)!important}
+@media(max-width:1000px){.game-shell .player-bars{width:180px}.game-shell .skillbar{bottom:12px;padding:12px 16px 7px}.game-shell .quest{width:200px}}
+@media(max-width:640px),(max-height:540px){.game-shell .skillbar{gap:6px;bottom:8px;padding:10px 12px 6px}.game-shell .skillbar .skill{width:52px;height:62px!important;padding:5px!important}.game-shell .skillbar .skill:first-child{width:58px;height:68px!important;margin-right:2px}.game-shell .skillbar .skill-emblem{width:32px;height:33px}.game-shell .skill-emblem>svg{width:22px;height:22px}.game-shell .skillbar .skill-name{font-size:8px;letter-spacing:0}.game-shell .interact-prompt{bottom:105px}.game-shell .world-interaction{font-size:11px;padding:7px 12px!important}.game-shell .player-bars{width:130px}.game-shell .quest{width:168px}.game-shell .quest strong{font-size:11px}.game-shell .skillbar .skill kbd{width:16px;height:15px;font-size:9px}}
+@media(prefers-reduced-motion:reduce){.game-shell button,.game-shell .skill-cooldown{transition:none}.game-shell .skillbar .skill:hover:not(:disabled),.game-shell .skillbar .skill[data-held=true],.game-shell .enter-mist-button:hover,.game-shell .enter-mist-button[data-held=true]{transform:none}}
