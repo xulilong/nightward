@@ -8,7 +8,7 @@ export const forestSites:Site[]=[
 ];
 export const villageSites:Site[]=[
  {id:0,x:1120,y:2780,name:'燃烧谷仓',detail:'从侧门救出铁匠'},
- {id:1,x:450,y:2080,name:'押解庭院',detail:'打开牢笼，救下村民'},
+ {id:1,x:535,y:2050,name:'押解庭院',detail:'打开牢笼，救下村民'},
  {id:2,x:1100,y:1320,name:'北方粮仓',detail:'关闭火油阀，保住粮食'},
 ];
 export const sitesFor=(stage:number)=>stage===1?villageSites:forestSites;

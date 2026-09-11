@@ -151,7 +151,7 @@ test('village art rebuild keeps all objectives reachable and restores old saves 
  const resumed=setup();resumed.continueCampaign();assert.ok(resumed.canWalk(resumed.player.x,resumed.player.y));for(const e of resumed.enemies)assert.ok(resumed.canWalk(e.x,e.y));
  const queue=[[800,3920]],seen=new Set(['800,3920']);
  for(let i=0;i<queue.length;i++){const [x,y]=queue[i];for(const [dx,dy] of [[20,0],[-20,0],[0,20],[0,-20]]){const nx=x+dx,ny=y+dy,key=nx+','+ny;if(!seen.has(key)&&resumed.canWalk(nx,ny)){seen.add(key);queue.push([nx,ny]);}}}
- for(const [x,y] of [[1120,2780],[450,2080],[1100,1320],[800,250]])assert.ok(queue.some(([nx,ny])=>Math.hypot(nx-x,ny-y)<35),'reachable objective '+x+','+y);
+ for(const [x,y] of [[1120,2780],[535,2050],[1100,1320],[800,250]])assert.ok(queue.some(([nx,ny])=>Math.hypot(nx-x,ny-y)<35),'reachable objective '+x+','+y);
  resumed.destroy();
 });
 

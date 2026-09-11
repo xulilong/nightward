@@ -79,12 +79,47 @@ export class NightView implements GameView {
     this.partitionWorld();this.updateWorldChunks(wz(3930));progress(100);
   }
   civilian(parent:T.Group,x:number,y:number,color:string){
-    const root=new T.Group();root.position.set(wx(x),.1,wz(y));parent.add(root);
-    const cloth=this.mat(color,.98),skin=this.mat('#bca98c',.9),boot=this.mat('#302b25',1);
-    this.mesh(new T.ConeGeometry(.3,1.05,8),cloth,root,0,.75,0);this.sphere(root,skin,0,1.46,0,.17,.21,.17);
-    this.box(root,boot,-.14,.13,0,.17,.3,.27);this.box(root,boot,.14,.13,0,.17,.3,.27);
+    const root=new T.Group();root.name='civilian';root.position.set(wx(x),.1,wz(y));parent.add(root);
+    const cloth=this.mat(color,.96),skin=this.mat('#b79c80',.86),leather=this.mat('#3c3027',.94),hair=this.mat('#53483b',1),linen=this.mat('#aa9e81',1);
+    const torso=new T.Group();root.add(torso);torso.name='civilian-breath';
+    this.mesh(new T.CylinderGeometry(.28,.37,.72,12),cloth,torso,0,1.18,0);
+    this.mesh(new T.CylinderGeometry(.35,.46,.49,12),cloth,torso,0,.71,0);
+    this.mesh(new T.CylinderGeometry(.365,.365,.075,12),leather,torso,0,.96,0);
+    this.box(torso,this.mat('#988364',.6,.35),0,.96,.365,.12,.09,.045);
+    this.sphere(torso,skin,0,1.86,0,.21,.28,.205);
+    this.sphere(torso,hair,0,2.015,-.035,.222,.17,.205);
+    this.sphere(torso,skin,0,1.86,.195,.06,.065,.065);
+    this.mesh(new T.TorusGeometry(.17,.065,6,14),linen,torso,0,1.59,0).rotation.x=Math.PI/2;
+    for(const side of [-1,1]){
+      const arm=new T.Group();arm.position.set(side*.31,1.43,0);arm.rotation.z=side*.12;arm.rotation.x=-.28;torso.add(arm);
+      this.mesh(new T.CylinderGeometry(.12,.095,.46,10),cloth,arm,side*.06,-.18,0);
+      this.mesh(new T.CylinderGeometry(.095,.075,.37,10),linen,arm,side*.09,-.53,.06);
+      this.sphere(arm,skin,side*.09,-.74,.08,.085,.115,.08);
+      this.mesh(new T.CylinderGeometry(.13,.10,.48,10),leather,root,side*.19,.4,0);
+      this.sphere(root,leather,side*.19,.14,.09,.14,.15,.24);
+    }
+    root.userData.restX=root.position.x;root.userData.restZ=root.position.z;
     return root;
   }
+  buildRescueCage(parent:T.Group){
+    const iron=this.mat('#55554a',.7,.55),wood=this.mat('#594b39',.97);
+    const w=2.275,d=1.75,h=2.5;
+    for(let i=0;i<7;i++)this.box(parent,wood,-w/2+(i+.5)*w/7,.09,0,w/7-.025,.18,d);
+    for(const x of [-w/2,w/2])for(const z of [-d/2,d/2])this.box(parent,iron,x,h/2,z,.095,h,.095);
+    for(const y of [.3,1.3,h]){
+      this.box(parent,iron,0,y,-d/2,w,.07,.075);
+      for(const x of [-w/2,w/2])this.box(parent,iron,x,y,0,.075,.07,d);
+    }
+    for(let i=1;i<7;i++)this.box(parent,iron,-w/2+i*w/7,h/2,-d/2,.035,h,.035);
+    for(const x of [-w/2,w/2])for(let i=1;i<5;i++)this.box(parent,iron,x,h/2,-d/2+i*d/5,.035,h,.035);
+    const door=new T.Group();door.name='rescue-cage-door';door.position.set(-w/2,0,d/2);parent.add(door);
+    for(const y of [.3,1.3,h])this.box(door,iron,w/2,y,0,w,.065,.065);
+    for(let i=0;i<=7;i++)this.box(door,iron,i*w/7,h/2,0,.035,h,.035);
+    this.box(door,this.mat('#b79b62',.55,.6),w-.15,1.16,.08,.17,.23,.11);
+    parent.userData.door=door;parent.userData.fadeMaterials=[];
+    return door;
+  }
+
   buildCampaignScenery(){
     this.chapterStructures=[];this.relayMarkers=[];this.forestPeople=[];this.siteMarkers=[];this.addSiteMarkers(0,this.terrain);
     this.forestPeople.push({root:this.civilian(this.terrain,1050,2910,'#665640'),id:0});
@@ -94,6 +129,18 @@ export class NightView implements GameView {
     const cover=this.mesh(new T.ConeGeometry(1.35,1.65,4,1,true),leather,tent,0,.95,0);cover.rotation.y=Math.PI/4;cover.scale.z=1.6;
     this.box(tent,wood,0,.85,-1.8,.06,1.7,.08);this.box(tent,wood,0,.85,1.8,.06,1.7,.08);
     const clue=this.terrain.getObjectByName('fire-shard') as T.Mesh;if(clue){clue.material=this.mat('#b4a47c',.8,.2);clue.scale.set(.7,.18,.7);clue.position.y=.22;clue.name='patrol-medallion';}
+    const papers=new T.Group();papers.name='patrol-orders';papers.position.set(wx(650),.34,wz(1880));this.terrain.add(papers);
+    const parchment=this.mat('#d6c69b',.97),seal=this.mat('#803e32',.75);
+    const page=this.box(papers,parchment,.08,.04,.12,.76,.025,.58);page.rotation.y=-.24;
+    for(const z of [-.2,.4]){const roll=this.mesh(new T.CylinderGeometry(.06,.06,.84,12),parchment,papers,.08,.09,z);roll.rotation.z=Math.PI/2;}
+    this.mesh(new T.CylinderGeometry(.075,.075,.03,14),seal,papers,.23,.075,.1);
+    for(let i=0;i<4;i++)this.box(papers,wood,-.06,.057,-.08+i*.07,.32-i*.035,.004,.012);
+    for(const site of [forestSites[0],forestSites[2]]){
+      const kit=new T.Group();kit.name='camp-supplies';kit.position.set(wx(site.x-30),.05,wz(site.y+12));this.terrain.add(kit);
+      this.box(kit,wood,0,.25,0,.7,.5,.55);
+      for(const x of [-.24,.24])this.box(kit,this.mat('#83775b',.75,.3),x,.26,0,.055,.52,.58);
+      for(let i=0;i<2;i++){const bottle=this.mat(i?'#738f7d':'#b19764',.4);this.mesh(new T.CylinderGeometry(.09,.12,.28,12),bottle,kit,-.12+i*.3,.65,0);this.box(kit,wood,-.12+i*.3,.82,0,.07,.07,.07);}
+    }
     const groundMat=this.mat('#502622',1);
     for(const [x,y] of [[790,3640],[830,3480],[995,3020],[670,1920]]){const stain=this.mesh(new T.CircleGeometry(.13,8),groundMat,this.terrain,wx(x),.04,wz(y));stain.rotation.x=-Math.PI/2;stain.scale.x=1.7;}
   }
@@ -111,7 +158,7 @@ export class NightView implements GameView {
     for(const prop of villageProps){
       const g=new T.Group();g.name='village-prop-'+prop.name;g.position.set(wx(prop.x),0,wz(prop.y));g.userData.building=prop;
       this.village.add(g);this.villageChunks.push(g);
-      const sprite=this.villageSprite('village-props-v2',prop.frame,prop.w*S*1.05,g,0,prop.d*S/2);g.userData.fadeMaterials=[sprite.material];
+      if(prop.name==='囚笼'){this.buildRescueCage(g);}else{const sprite=this.villageSprite('village-props-v2',prop.frame,prop.w*S*1.05,g,0,prop.d*S/2);g.userData.fadeMaterials=[sprite.material];}
       this.villageContactShadow(g,prop.w*S,prop.d*S);
     }
     this.buildVillageBorders(stone);this.addSiteMarkers(1,this.village);
@@ -119,8 +166,21 @@ export class NightView implements GameView {
     const fireMaterial=new T.ShaderMaterial({transparent:true,depthWrite:false,side:T.DoubleSide,uniforms:{time:this.sampleTime},vertexShader:'varying vec2 v;void main(){v=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:`varying vec2 v;uniform float time;void main(){float x=v.x-.5+sin(v.y*9.-time*7.)*.09*v.y+sin(v.y*21.+time*4.)*.025;float width=(1.-v.y)*.43;float edge=1.-smoothstep(width*.55,width+.025,abs(x));float flicker=.78+.22*sin(v.y*23.-time*11.);float a=edge*smoothstep(0.,.12,v.y)*(1.-smoothstep(.68,1.,v.y))*flicker;vec3 c=mix(vec3(.95,.56,.12),vec3(.65,.095,.012),v.y);gl_FragColor=vec4(c,a*.72);}`});this.materials.add(fireMaterial);
     for(const site of villageSites){
       const g=new T.Group();g.name='village-rescue-'+site.id;g.position.set(wx(site.x),0,wz(site.y));this.village.add(g);this.villageChunks.push(g);
-      this.villagers.push({root:this.civilian(g,800,2100,site.id===0?'#795943':'#7d7666'),id:site.id});
-      if(site.id!==1){this.mesh(new T.CylinderGeometry(.3,.3,.55,12),wood,g,-.9,.28,.5);const valve=this.mesh(new T.TorusGeometry(.24,.045,6,16),metal,g,-.9,.79,.5);valve.rotation.x=-.4;}
+      if(site.id===1){
+        const cage=villageProps.find(p=>p.name==='囚笼')!;
+        for(const [offset,color] of [[-13,'#9e8062'],[13,'#71867b']] as const){
+          const person=this.civilian(g,800+cage.x-site.x+offset,2100+cage.y-site.y,color);
+          person.scale.setScalar(.9);person.name='captive-villager';this.villagers.push({root:person,id:site.id});
+        }
+      }else if(site.id===0){const person=this.civilian(g,800,2100,'#8b6951');person.name='rescued-blacksmith';this.villagers.push({root:person,id:site.id});}
+
+      if(site.id!==1){
+        this.mesh(new T.CylinderGeometry(.46,.46,.95,18),wood,g,-.9,.5,.1);
+        for(const y of [.2,.75])this.mesh(new T.TorusGeometry(.47,.035,6,18),metal,g,-.9,y,.1).rotation.x=Math.PI/2;
+        const valve=this.mesh(new T.TorusGeometry(.34,.052,8,20),this.mat('#ac8551',.6,.5),g,-.9,1.18,.1);valve.rotation.x=-Math.PI/2;valve.name='rescue-valve';
+        for(let i=0;i<3;i++){const spoke=this.box(g,metal,-.9,1.18,.1,.64,.045,.045);spoke.rotation.y=i*Math.PI/3;}
+        for(let i=0;i<3;i++)this.sphere(g,this.mat('#968668',1),.65+(i%2)*.55,.25+Math.floor(i/2)*.4,.3,.36,.27,.42);
+      }
     }
     // Animated fire sits in the ruined architecture, not on every rescue NPC.
     const smokeMat=new T.ShaderMaterial({transparent:true,depthWrite:false,uniforms:{time:this.sampleTime},vertexShader:`uniform float time;varying float fade;void main(){float phase=fract(time*.13+position.x);vec3 p=vec3(sin(position.x*12.+time*.4)*phase*.6,1.1+phase*3.3,phase*.3);gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.);gl_PointSize=24.+phase*44.;fade=sin(phase*3.14159)*.08;}`,fragmentShader:`varying float fade;void main(){float d=length(gl_PointCoord-.5)*2.;gl_FragColor=vec4(.30,.34,.33,(1.-smoothstep(.1,1.,d))*fade);}`});this.materials.add(smokeMat);
@@ -227,7 +287,10 @@ export class NightView implements GameView {
   }
   addSiteMarkers(stage:number,parent:T.Group){
     this.siteMarkers??=[];
-    for(const site of stage===0?forestSites:villageSites){const marker=this.ring(.5,.018,'#bca776',.55);marker.name='story-site-'+stage+'-'+site.id;marker.position.set(wx(site.x),.07,wz(site.y));parent.add(marker);this.siteMarkers.push({mesh:marker,stage,id:site.id,x:site.x,y:site.y});}
+    for(const site of stage===0?forestSites:villageSites){const marker=this.ring(.83,.022,'#d8bf81',.65);marker.name='story-site-'+stage+'-'+site.id;marker.position.set(wx(site.x),.07,wz(site.y));parent.add(marker);
+      const beaconMaterial=new T.MeshBasicMaterial({color:'#ead6a2',transparent:true,opacity:.8,depthWrite:false});this.materials.add(beaconMaterial);
+      const beacon=this.mesh(new T.RingGeometry(.12,.17,4),beaconMaterial,marker,0,0,-2.9);beacon.name='interaction-beacon';beacon.quaternion.copy(marker.quaternion.clone().invert().multiply(this.camera.quaternion));beacon.castShadow=false;
+      this.siteMarkers.push({mesh:marker,stage,id:site.id,x:site.x,y:site.y});}
   }
   updateChapterScenery(game:NightGame,target:T.Vector3){
     const village=game.stage===1;this.terrain.visible=!village;this.village.visible=village;this.fireflies.visible=!village;
@@ -238,8 +301,15 @@ export class NightView implements GameView {
     }
     for(const f of this.villageFires){f.mesh.visible=!game.used.has(f.id);f.mesh.scale.set(1+Math.sin(game.clock*7+(f.mesh.userData.phase??f.id))*.16,1+Math.sin(game.clock*9+(f.mesh.userData.phase??0))*.23,1);}
     for(const f of this.villageSmoke)f.mesh.visible=!game.used.has(f.id);
-    for(const npc of this.villagers){npc.root.visible=true;if(game.used.has(npc.id))npc.root.rotation.y=-.35;else npc.root.rotation.y=0;}
-    for(const marker of this.siteMarkers??[]){const distance=Math.hypot(game.player.x-marker.x,game.player.y-marker.y),done=game.used.has(marker.id);marker.mesh.visible=game.stage===marker.stage&&distance<280;const m=marker.mesh.material as T.MeshBasicMaterial;m.color.set(done?'#8eaf9a':'#c6ab78');m.opacity=done?.3:.45+Math.sin(game.clock*2)*.08;}
+    for(const group of this.villageChunks){const door=group.userData.door as T.Group|undefined;if(door)door.rotation.y=game.used.has(1)?-1.45:0;}
+    for(const npc of [...this.villagers,...(this.forestPeople??[])]){
+      const done=game.used.has(npc.id);const torso=npc.root.getObjectByName('civilian-breath');if(torso)torso.scale.y=1+Math.sin(game.clock*2.1+npc.root.position.x)*.008;
+      if(npc.root.name==='captive-villager'){
+        const destination=npc.root.userData.restZ+(done?3.05:0);npc.root.position.z+=(destination-npc.root.position.z)*.045;
+        npc.root.rotation.y=done?-.3:Math.sin(game.clock*.65)*.09;
+      }
+    }
+    for(const marker of this.siteMarkers??[]){const distance=Math.hypot(game.player.x-marker.x,game.player.y-marker.y),done=game.used.has(marker.id);marker.mesh.visible=game.stage===marker.stage&&distance<460;const m=marker.mesh.material as T.MeshBasicMaterial;m.color.set(done?'#8eaf9a':'#c6ab78');m.opacity=done?.18:distance<180?.65:.38;const beacon=marker.mesh.getObjectByName('interaction-beacon');if(beacon){beacon.visible=!done;beacon.position.z=-2.9-Math.sin(game.clock*1.6+marker.id)*.055;}}
     if(this.weather){this.weather.visible=village;this.weather.position.set(target.x,0,target.z);const p=this.weather.geometry.getAttribute('position');for(let i=0;i<p.count;i++)p.setY(i,8-((game.clock*.35+i*.347)%8));p.needsUpdate=true;}
   }
   disposeActor(actor:Actor){
@@ -634,7 +704,7 @@ float hem=min(min(capeUV.x,1.-capeUV.x),capeUV.y);float trim=1.-smoothstep(.008,
     if(game.stage===1)for(const f of this.villageFires){if(!f.mesh.visible||f.mesh.parent?.children[0]!==f.mesh)continue;lightSources.push({position:f.mesh.getWorldPosition(new T.Vector3()).add(new T.Vector3(0,.6,0)),strength:15});}
     lightSources.sort((a,b)=>a.position.distanceToSquared(target)-b.position.distanceToSquared(target));
     this.routeLights.forEach((light,i)=>{const source=lightSources[i];if(!source){light.intensity=0;return;}light.position.copy(source.position);const distance=Math.abs(light.position.z-target.z),fade=Math.max(0,Math.min(1,(23-distance)/5));light.intensity=source.strength*fade*(.95+Math.sin(game.clock*8+light.position.z)*.05);});
-    const shard=this.terrain.getObjectByName('patrol-medallion');if(shard)shard.visible=!game.used.has(1);
+    const shard=this.terrain.getObjectByName('patrol-medallion');if(shard)shard.visible=!game.used.has(1);const orders=this.terrain.getObjectByName('patrol-orders');if(orders)orders.visible=!game.used.has(1);
     if(this.water){const mat=this.water.material as T.MeshPhysicalMaterial;mat.roughness=.18+Math.sin(game.clock*.6)*.035;}
     const swingActive=attacking&&progress>.17&&progress<.7||!!this.hero.skillPose&&(this.hero.skillPose.kind==='spin'||this.hero.skillPose.kind==='cast'&&this.hero.skillPose.progress>.19&&this.hero.skillPose.progress<.6);this.sampleSwordTrail(this.hero,game.clock,swingActive);
     this.drawEffects(game);this.composer.render(dt);

@@ -128,3 +128,19 @@ test('cohesion pass shares road material source and closes the former cracked ro
  for(let i=0;i<indices.length;i+=3)for(let j=0;j<3;j++){const a=indices[i+j],b=indices[i+(j+1)%3],key=Math.min(a,b)+','+Math.max(a,b);edges.set(key,(edges.get(key)||0)+1);}for(const count of edges.values())assert.equal(count,2,'closed rock edges');
  for(const house of v.villageChunks.filter(g=>g.name==='village-house')){assert.ok(house.getObjectByName('weathered-house-apron'));assert.ok(house.getObjectByName('foundation-rubble'));for(const material of house.userData.fadeMaterials){assert.equal(material.emissiveMap,null,'unkeyed source must not reappear through emission');}}
 });
+
+test('prisoners occupy the actual cage and exit through its opened door after rescue',()=>{
+ const v=paintedView(),maps=Array.from({length:4},()=>new T.Texture());v.buildWorld(maps);v.buildCampaignScenery();v.buildVillage(maps,new T.Texture());
+ v.fireflies=new T.Points();v.sun=new T.DirectionalLight();v.scene.background=new T.Color();v.scene.fog=new T.Fog('#000',24,76);
+ const cage=v.village.getObjectByName('village-prop-囚笼');const door=cage.getObjectByName('rescue-cage-door');assert.ok(door);
+ const captives=v.villagers.filter(n=>n.root.name==='captive-villager');assert.equal(captives.length,2);
+ v.scene.updateMatrixWorld(true);const before=captives.map(n=>n.root.getWorldPosition(new T.Vector3()));
+ const center=cage.getWorldPosition(new T.Vector3());for(const position of before){assert.ok(Math.abs(position.x-center.x)<.7);assert.ok(Math.abs(position.z-center.z)<.5);}
+ const game={stage:1,clock:1,used:new Set(),player:{x:535,y:2050}};v.updateChapterScenery(game,center);assert.equal(door.rotation.y,0);
+ game.used.add(1);for(let i=0;i<120;i++)v.updateChapterScenery(game,center);
+ assert.ok(door.rotation.y < -1);v.scene.updateMatrixWorld(true);
+ captives.forEach((n,i)=>assert.ok(n.root.getWorldPosition(new T.Vector3()).z-before[i].z>2.8));
+ game.used.clear();for(let i=0;i<120;i++)v.updateChapterScenery(game,center);assert.equal(door.rotation.y,0);
+ assert.ok(v.terrain.getObjectByName('patrol-orders'));assert.ok(v.terrain.getObjectByName('camp-supplies'));
+ for(const marker of v.siteMarkers){assert.ok(marker.mesh.getObjectByName('interaction-beacon'));}
+});
